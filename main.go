@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/TejasGhatte/go-sail/cmd"
+	"github.com/TejasGhatte/go-sail/internal/initializers"
 	"github.com/spf13/cobra"
 )
 
@@ -13,6 +14,7 @@ var rootCmd = &cobra.Command{
 }
 
 func main() {
+	initializers.LoadConfig("config.yaml")
 	rootCmd.AddCommand(cmd.CreateProjectCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
