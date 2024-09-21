@@ -5,21 +5,22 @@ import (
     "fmt"
 )
 
-var frameworks = []string{"Go Fiber", "Gin", "Echo", "Chi"}
+var frameworks = []string{"fiber", "gin", "echo", "chi"}
 
-var databases = []string{"PostgreSQL", "MySQL", "MongoDB", "None"}
+var databases = []string{"postgres", "mysql", "mongo", "None"}
 
-var orms = []string{"GORM", "SQLX", "None"}
+var orms = []string{"gorm", "sqlx", "None"}
 
 func SelectFramework() string {
     var framework string
     prompt := &survey.Select{
-        Message: "Choose a Go framework:",
+        Message: "🚀 Choose a Go framework:",
         Options: frameworks,
+        Help:    "Select the framework you want to use for your project",
     }
     err := survey.AskOne(prompt, &framework)
     if err != nil {
-        fmt.Println("Error selecting framework:", err)
+        fmt.Println("❌ Error selecting framework:", err)
     }
     return framework
 }
@@ -27,13 +28,14 @@ func SelectFramework() string {
 func SelectDatabase() string {
     var database string
     prompt := &survey.Select{
-        Message: "Choose a database (or None):",
+        Message: "💾 Choose a database (or None):",
         Options: databases,
-		Default: "None",
+        Default: "None",
+        Help:    "Select the database you want to use, or 'None' if you don't need one",
     }
     err := survey.AskOne(prompt, &database)
     if err != nil {
-        fmt.Println("Error selecting database:", err)
+        fmt.Println("❌ Error selecting database:", err)
     }
     if database == "None" {
         return ""
@@ -44,13 +46,14 @@ func SelectDatabase() string {
 func SelectORM() string {
     var orm string
     prompt := &survey.Select{
-        Message: "Choose an ORM (or None):",
+        Message: "🔗 Choose an ORM (or None):",
         Options: orms,
-		Default: "None",
+        Default: "None",
+        Help:    "Select an ORM for database interactions, or 'None' if you don't need one",
     }
     err := survey.AskOne(prompt, &orm)
     if err != nil {
-        fmt.Println("Error selecting ORM:", err)
+        fmt.Println("❌ Error selecting ORM:", err)
     }
     if orm == "None" {
         return ""
@@ -61,12 +64,13 @@ func SelectORM() string {
 func SelectLogging() bool {
     var logging bool
     prompt := &survey.Confirm{
-        Message: "Do you want to include logging?",
+        Message: "📝 Do you want to include logging?",
         Default: true,
+        Help:    "Choose whether to include a logging system in your project",
     }
     err := survey.AskOne(prompt, &logging)
     if err != nil {
-        fmt.Println("Error selecting logging option:", err)
+        fmt.Println("❌ Error selecting logging option:", err)
     }
     return logging
 }
@@ -74,12 +78,13 @@ func SelectLogging() bool {
 func SelectCaching() bool {
     var caching bool
     prompt := &survey.Confirm{
-        Message: "Do you want to include caching?",
+        Message: "⚡ Do you want to include caching?",
         Default: false,
+        Help:    "Choose whether to include a caching system in your project",
     }
     err := survey.AskOne(prompt, &caching)
     if err != nil {
-        fmt.Println("Error selecting caching option:", err)
+        fmt.Println("❌ Error selecting caching option:", err)
     }
     return caching
 }
