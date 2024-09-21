@@ -35,12 +35,12 @@ combinations:
   mysql:
     gorm:
       dsnTemplate: "%s:%s@tcp(localhost:3306)/%s?parseTime=true"
-      initFunc: "gorm.Open(mysql.Open)"
+      initFunc: "gorm.Open(mysql.Open(dsn), &gorm.Config{})"
       additionalImports:
         - gorm.io/driver/mysql
     sqlx:
       dsnTemplate: "%s:%s@tcp(localhost:3306)/%s?parseTime=true"
-      initFunc: "sqlx.Connect"
+      initFunc: "sqlx.Connect("mysql", dsn)"
   sqlite:
     gorm:
       dsnTemplate: "%s.db"
@@ -66,20 +66,17 @@ migrationCode:
       return fmt.Errorf("unexpected DB type for GORM migrations")
     }
   sqlx: |
-    if db, ok := DB.(*sqlx.DB); ok {
       migrations := []string{
-        // Add your migration SQL here
-        // "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, email TEXT);",
-        // "CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY, title TEXT, content TEXT, user_id INTEGER);",
+      // Add your migration SQL here
+      // "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, email TEXT);",
+      // "CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY, title TEXT, content TEXT, user_id INTEGER);",
       }
+      fmt.Println("Running migrations")
       for _, migration := range migrations {
-        _, err := db.Exec(migration)
+        _, err := DB.Exec(migration)
         if err != nil {
-          return fmt.Errorf("failed to run migration: %w", err)
+          fmt.Errorf("failed to run migrations: %w", err)
         }
       }
-    } else {
-      return fmt.Errorf("unexpected DB type for sqlx migrations")
-    }
   default: |
     fmt.Println("No specific migration logic for this ORM. Implement custom migration logic here.")
