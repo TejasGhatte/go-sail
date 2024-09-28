@@ -12,7 +12,7 @@ import (
 	"github.com/TejasGhatte/go-sail/internal/prompts"
 )
 
-func CreateProject(ctx context.Context, name string) error {
+func CreateProject(name string) error {
 	framework := prompts.SelectFramework()
 	database := prompts.SelectDatabase()
 
