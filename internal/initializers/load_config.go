@@ -10,16 +10,14 @@ import (
 )
 var Config models.Config
 
-func LoadConfig(filename string) error {
+func LoadConfig(filename string){
 	data, err := os.ReadFile(filename)
 	if err != nil {
-		return fmt.Errorf("error reading config file: %w", err)
+		fmt.Errorf("error reading config file: %w", err)
 	}
 
 	err = yaml.Unmarshal(data, &Config)
 	if err != nil {
-		return fmt.Errorf("error parsing config file: %w", err)
+		fmt.Errorf("error parsing config file: %w", err)
 	}
-
-	return nil
 }
