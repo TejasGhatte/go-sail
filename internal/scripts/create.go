@@ -3,7 +3,10 @@ package scripts
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"context"
+	"time"
 
 	"github.com/TejasGhatte/go-sail/internal/helpers"
 	"github.com/TejasGhatte/go-sail/internal/initializers"
@@ -11,7 +14,7 @@ import (
 	"github.com/TejasGhatte/go-sail/internal/prompts"
 )
 
-func CreateProject(name string) {
+func CreateProject(ctx context.Context, name string) error {
 	framework := prompts.SelectFramework()
 	database := prompts.SelectDatabase()
 
@@ -19,25 +22,33 @@ func CreateProject(name string) {
 	if database != "" {
 		orm = prompts.SelectORM()
 	}
-	caching := prompts.SelectCaching()
-	logging := prompts.SelectLogging()
 
 	fmt.Println("Generating project with the following options:")
-    fmt.Printf("Framework: %s, Database: %s, ORM: %s, Logging: %t, Caching: %t\n", framework, database, orm, logging, caching)
+    fmt.Printf("Framework: %s, Database: %s, ORM: %s\n", framework, database, orm)
 	
-	ctx := &models.Options{
+	options := &models.Options{
 		ProjectName: name,
 		Framework:   framework,
 		Database:    database,
 		ORM:         orm,
-		Caching:     caching,
-		Logging:     logging,
 	}
 
-	err := PopulateDirectory(ctx)
-	if err != nil {
-		fmt.Println("Error creating project:", err)
+	for i := 0; i < 10; i++ {
+		select {
+		case <-ctx.Done():
+			return fmt.Errorf("project creation interrupted")
+		default:
+			fmt.Printf("Creating project: %s [%d/10]\n", name, i+1)
+			time.Sleep(1 * time.Second)
+		}
 	}
+
+	err := PopulateDirectory(options)
+	if err != nil {
+		return fmt.Errorf("error creating project: %w", err)
+	}
+
+	return nil
 }
 
 func PopulateDirectory(ctx *models.Options) error {
@@ -63,6 +74,10 @@ func PopulateDirectory(ctx *models.Options) error {
 		if err != nil {
 			return fmt.Errorf("error generating migration file: %v", err)
 		}
+
+		exec.Command("goimports", "-w", ".")
+		exec.Command("go", "mod", "tidy")
+
 	}
 	return nil
 }
