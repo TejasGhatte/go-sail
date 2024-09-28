@@ -16,6 +16,7 @@ func SelectFramework() string {
     prompt := &survey.Select{
         Message: "🚀 Choose a Go framework:",
         Options: frameworks,
+        Default: "fiber",
         Help:    "Select the framework you want to use for your project",
     }
     err := survey.AskOne(prompt, &framework)
