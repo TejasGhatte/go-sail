@@ -27,12 +27,12 @@ func ConnectDB(){
 }
 `)
 	if err != nil {
-		return fmt.Errorf("failed to parse database template: %w", err)
+		return 
 	}
 
 	f, err := os.Create(filename)
 	if err != nil {
-		return fmt.Errorf("failed to create database file: %w", err)
+		return 
 	}
 	defer f.Close()
 
@@ -48,7 +48,7 @@ func ConnectDB(){
 
 	err = tmpl.Execute(f, data)
 	if err != nil {
-		return fmt.Errorf("failed to execute database template: %w", err)
+		return 
 	}
 
 	return nil
@@ -73,12 +73,12 @@ func DBMigrate() error {
 }
 `)
 	if err != nil {
-		return fmt.Errorf("failed to parse migration template: %w", err)
+		return 
 	}
 
 	f, err := os.Create(filename)
 	if err != nil {
-		return fmt.Errorf("failed to create migration file: %w", err)
+		return 
 	}
 	defer f.Close()
 
@@ -92,7 +92,7 @@ func DBMigrate() error {
 
 	err = tmpl.Execute(f, data)
 	if err != nil {
-		return fmt.Errorf("failed to execute migration template: %w", err)
+		return 
 	}
 
 	return nil
