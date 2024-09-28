@@ -6,9 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"context"
-	"time"
 
-	"github.com/briandowns/spinner"
 	"github.com/TejasGhatte/go-sail/internal/helpers"
 	"github.com/TejasGhatte/go-sail/internal/initializers"
 	"github.com/TejasGhatte/go-sail/internal/models"
@@ -32,20 +30,6 @@ func CreateProject(ctx context.Context, name string) error {
 		Framework:   framework,
 		Database:    database,
 		ORM:         orm,
-	}
-
-	s := spinner.New(spinner.CharSets[14], 100*time.Millisecond)
-	s.Start()
-	defer s.Stop()
-
-	for i := 0; i < 2; i++ {
-		select {
-		case <-ctx.Done():
-			return fmt.Errorf("project creation interrupted")
-		default:
-			s.Suffix = fmt.Sprintf(" Creating project: %s", name)
-			time.Sleep(1 * time.Second)
-		}
 	}
 
 	err := PopulateDirectory(options)
