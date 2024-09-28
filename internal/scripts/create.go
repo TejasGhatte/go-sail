@@ -36,6 +36,7 @@ func CreateProject(ctx context.Context, name string) error {
 
 	s := spinner.New(spinner.CharSets[14], 100*time.Millisecond)
 	s.Start()
+	defer s.Stop()
 
 	for i := 0; i < 2; i++ {
 		select {
@@ -47,11 +48,9 @@ func CreateProject(ctx context.Context, name string) error {
 		}
 	}
 
-	defer s.Stop()
-
 	err := PopulateDirectory(options)
 	if err != nil {
-		return fmt.Errorf("error creating project: %w", err)
+		return err
 	}
 
 	return nil

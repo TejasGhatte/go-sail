@@ -29,7 +29,7 @@ func runCreateProject(name string) error {
 
 	err := scripts.CreateProject(ctx, name)
 	if err != nil {
-		return fmt.Errorf("error creating project: %v", err)
+		return fmt.Errorf("error creating project: %w", err)
 	}
 	return nil
 }
