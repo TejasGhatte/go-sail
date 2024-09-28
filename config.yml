@@ -35,12 +35,12 @@ combinations:
   mysql:
     gorm:
       dsnTemplate: "%s:%s@tcp(localhost:3306)/%s?parseTime=true"
-      initFunc: "gorm.Open(mysql.Open(dsn), &gorm.Config{})"
+      initFunc: "gorm.Open(mysql.Open, &gorm.Config{})(dsn)"
       additionalImports:
         - gorm.io/driver/mysql
     sqlx:
       dsnTemplate: "%s:%s@tcp(localhost:3306)/%s?parseTime=true"
-      initFunc: "sqlx.Connect("mysql", dsn)"
+      initFunc: "sqlx.Connect("mysql"(dsn)"
   sqlite:
     gorm:
       dsnTemplate: "%s.db"
