@@ -5,6 +5,4 @@ type Options struct {
 	Framework   string
 	Database    string
 	ORM         string
-	Caching     bool
-	Logging     bool
 }

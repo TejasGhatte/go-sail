@@ -60,31 +60,3 @@ func SelectORM() string {
     }
     return orm
 }
-
-func SelectLogging() bool {
-    var logging bool
-    prompt := &survey.Confirm{
-        Message: "📝 Do you want to include logging?",
-        Default: true,
-        Help:    "Choose whether to include a logging system in your project",
-    }
-    err := survey.AskOne(prompt, &logging)
-    if err != nil {
-        fmt.Println("❌ Error selecting logging option:", err)
-    }
-    return logging
-}
-
-func SelectCaching() bool {
-    var caching bool
-    prompt := &survey.Confirm{
-        Message: "⚡ Do you want to include caching?",
-        Default: false,
-        Help:    "Choose whether to include a caching system in your project",
-    }
-    err := survey.AskOne(prompt, &caching)
-    if err != nil {
-        fmt.Println("❌ Error selecting caching option:", err)
-    }
-    return caching
-}
