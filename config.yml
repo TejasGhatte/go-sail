@@ -53,17 +53,13 @@ combinations:
 
 migrationCode:
   gorm: |
-    if db, ok := DB.(*gorm.DB); ok {
-      err := db.AutoMigrate(
-        // Add your models here
-        // &models.User{},
-        // &models.Post{},
-      )
-      if err != nil {
-        return fmt.Errorf("failed to run migrations: %w", err)
-      }
-    } else {
-      return fmt.Errorf("unexpected DB type for GORM migrations")
+    err := DB.AutoMigrate(
+    // Add your models here
+    // &models.User{},
+    // &models.Post{},
+    )
+    if err != nil {
+      return fmt.Errorf("failed to run migrations: %w", err)
     }
   sqlx: |
       migrations := []string{
