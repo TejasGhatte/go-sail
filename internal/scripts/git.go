@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/go-git/go-git/v5"
-	"github.com/TejasGhatte/go-sail/internal/helpers"
 )
 
 func GitClone(projectName, templateType, templateURL string) error {
@@ -31,8 +30,6 @@ func GitClone(projectName, templateType, templateURL string) error {
 	if errPlainClone != nil {
 		return fmt.Errorf("repository `%v` was not cloned", templateURL)
 	}
-
-	go helpers.RemoveFolders(folder, []string{".git", ".github"})
 
 	return nil
 }
