@@ -3,7 +3,6 @@ package scripts
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"context"
 
@@ -63,9 +62,6 @@ func PopulateDirectory(ctx *models.Options) error {
 		if err != nil {
 			return fmt.Errorf("error generating migration file: %v", err)
 		}
-
-		exec.Command("goimports", "-w", ".")
-		exec.Command("go", "mod", "tidy")
 
 	}
 	return nil
