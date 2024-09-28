@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"context"
 
 	"github.com/TejasGhatte/go-sail/internal/helpers"
 	"github.com/TejasGhatte/go-sail/internal/initializers"

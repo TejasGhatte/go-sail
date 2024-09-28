@@ -56,20 +56,11 @@ func (cp *CombinationProvider) GetDBVariable() string {
 
 // ProviderFactory creates a provider for a specific database and ORM combination
 func ProviderFactory(database, orm string) (Provider, error) {
-	dbConfig, ok := initializers.Config.Databases[database]
-	if !ok {
-		return nil, fmt.Errorf("unsupported database: %s", database)
-	}
+	dbConfig := initializers.Config.Databases[database]
 
-	ormConfig, ok := initializers.Config.ORMs[orm]
-	if !ok {
-		return nil, fmt.Errorf("unsupported ORM: %s", orm)
-	}
+	ormConfig := initializers.Config.ORMs[orm]
 
-	combinationConfig, ok := initializers.Config.Combinations[database][orm]
-	if !ok {
-		return nil, fmt.Errorf("unsupported combination of database %s and ORM %s", database, orm)
-	}
+	combinationConfig := initializers.Config.Combinations[database][orm]
 
 	return &CombinationProvider{
 		Database:    dbConfig,
