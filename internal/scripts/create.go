@@ -8,6 +8,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/briandowns/spinner"
 	"github.com/TejasGhatte/go-sail/internal/helpers"
 	"github.com/TejasGhatte/go-sail/internal/initializers"
 	"github.com/TejasGhatte/go-sail/internal/models"
@@ -33,15 +34,20 @@ func CreateProject(ctx context.Context, name string) error {
 		ORM:         orm,
 	}
 
-	for i := 0; i < 10; i++ {
+	s := spinner.New(spinner.CharSets[14], 100*time.Millisecond)
+	s.Start()
+
+	for i := 0; i < 2; i++ {
 		select {
 		case <-ctx.Done():
 			return fmt.Errorf("project creation interrupted")
 		default:
-			fmt.Printf("Creating project: %s [%d/10]\n", name, i+1)
+			s.Suffix = fmt.Sprintf(" Creating project: %s", name)
 			time.Sleep(1 * time.Second)
 		}
 	}
+
+	defer s.Stop()
 
 	err := PopulateDirectory(options)
 	if err != nil {
