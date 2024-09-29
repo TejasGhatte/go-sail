@@ -1,7 +1,5 @@
 # go-sail
 
-![Go Sail Logo](assets\golang-logo.jpg) <!-- Replace with actual logo if available -->
-
 **go-sail** is a powerful CLI tool written in Go using the Cobra library. It simplifies the process of setting up Go backend frameworks like Giber, Echo, and Gin by generating templates with built-in logging and caching features. Designed for both beginners and seasoned developers, **go-sail** reduces the time spent on repetitive coding tasks during project initialization.
 
 ## Table of Contents
