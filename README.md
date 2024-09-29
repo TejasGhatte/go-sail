@@ -10,7 +10,6 @@
 - [Commands](#commands)
 - [Example](#example)
 - [Contributing](#contributing)
-- [License](#license)
 - [References](#references)
 
 ## Features
