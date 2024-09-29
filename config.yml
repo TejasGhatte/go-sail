@@ -31,7 +31,7 @@ combinations:
         - gorm.io/driver/postgres
     sqlx:
       dsnTemplate: "user=%s password=%s dbname=%s sslmode=disable"
-      initFunc: "sqlx.Connect"
+      initFunc: "sqlx.Connect(\"mysql\", dsn)"
   mysql:
     gorm:
       dsnTemplate: "%s:%s@tcp(localhost:3306)/%s?parseTime=true"
@@ -49,7 +49,7 @@ combinations:
         - gorm.io/driver/sqlite
     sqlx:
       dsnTemplate: "%s.db"
-      initFunc: "sqlx.Connect"
+      initFunc: "sqlx.Connect(\"mysql\", dsn)"
 
 migrationCode:
   gorm: |
