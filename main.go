@@ -9,8 +9,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "go-sail",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains`,
+	Short: "A cli for generating project templates for Go backend frameworks",
+	Long: `go-sail is a CLI tool that generates project templates for Go backend frameworks like Fiber, Echo, and Gin, with pre-configured logging and caching, helping developers quickly set up and initialize projects. User can choose their own database and orm configurations, and go-sail generates the necessary files for the project.`,
 }
 
 func main() {
