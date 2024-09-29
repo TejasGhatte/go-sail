@@ -1,6 +1,6 @@
 # go-sail
 
-**go-sail** is a powerful CLI tool written in Go using the Cobra library. It simplifies the process of setting up Go backend frameworks like Giber, Echo, and Gin by generating templates with built-in logging and caching features. Designed for both beginners and seasoned developers, **go-sail** reduces the time spent on repetitive coding tasks during project initialization.
+**go-sail** is a powerful CLI tool written in Go using the Cobra library. It simplifies the process of setting up Go backend frameworks like Fiber, Echo, and Gin by generating templates with built-in logging and caching features. Designed for both beginners and seasoned developers, **go-sail** reduces the time spent on repetitive coding tasks during project initialization.
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 
 ## Features
 
-- Generates templates for popular Go frameworks: Giber, Echo, Gin.
+- Generates templates for popular Go frameworks: Fiber, Echo, Gin.
 - Make your own configuration with framework, databae and orm
 - Integrated logging and caching setups.
 - Reduces project setup time.
@@ -87,7 +87,7 @@ We follow the Conventional Commits specification for our commit messages. This l
   - Example: `refactor: simplify template generation logic`
 
 - `test`: Adding missing tests or correcting existing tests
-  - Example: `test: add unit tests for Giber template generation`
+  - Example: `test: add unit tests for Fiber template generation`
 
 ## References
 1. https://github.com/spf13/cobra
