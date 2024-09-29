@@ -5,9 +5,9 @@ import (
     "fmt"
 )
 
-var frameworks = []string{"fiber", "gin", "echo", "chi"}
+var frameworks = []string{"fiber", "gin", "echo"}
 
-var databases = []string{"postgres", "mysql", "mongo", "None"}
+var databases = []string{"postgres", "mysql", "None"}
 
 var orms = []string{"gorm", "sqlx", "None"}
 

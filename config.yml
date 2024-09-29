@@ -43,13 +43,13 @@ combinations:
       initFunc: "sqlx.Connect("mysql"(dsn)"
   sqlite:
     gorm:
-      dsnTemplate: "%s.db"
-      initFunc: "gorm.Open(sqlite.Open)"
+      dsnTemplate: ""
+      initFunc: ""
       additionalImports:
-        - gorm.io/driver/sqlite
+        - 
     sqlx:
-      dsnTemplate: "%s.db"
-      initFunc: "sqlx.Connect"
+      dsnTemplate: ""
+      initFunc: ""
 
 migrationCode:
   gorm: |
