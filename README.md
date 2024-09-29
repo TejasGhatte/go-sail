@@ -51,8 +51,8 @@ Once installed, you can start using go-sail to generate templates for your Go pr
 
 ## Commands
 1.  Initialize a new Go project with a chosen framework, database and orm configuration.
-   ```bash
-   go-sail create my-app
+    ```bash
+    go-sail create my-app
 
 ## Example
 add imagaes here
@@ -63,7 +63,7 @@ Please follow these steps to contribute
 2. Create a new branch for your feature or bug fix.
 3. Make your changes and commit them with a clear commit message.
 4. Push your changes to your fork.
-5. Submit a pull request to the dev repository.
+5. Submit a pull request to the dev branch of repository.
 
 ### Commit Message Guidelines
 We follow the Conventional Commits specification for our commit messages. This leads to more readable messages that are easy to follow when looking through the project history. Here are some of the most common types of commits:
