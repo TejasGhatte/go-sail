@@ -55,7 +55,10 @@ Once installed, you can start using go-sail to generate templates for your Go pr
     go-sail create my-app
 
 ## Example
-add imagaes here
+![image](https://github.com/user-attachments/assets/2e363533-9637-4a52-a784-ddb0aa338911)
+![image](https://github.com/user-attachments/assets/4dd8542f-dc5c-4fce-bddf-82c6cf483368)
+![image](https://github.com/user-attachments/assets/1797d83a-1993-430a-80c2-207d9ad52a7d)
+![image](https://github.com/user-attachments/assets/9abcea55-2b5a-4c74-90cc-914f03e6dbf2)
 
 ## Contributing
 Please follow these steps to contribute
