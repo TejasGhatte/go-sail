@@ -27,7 +27,7 @@ func runCreateProject(name string) error {
 	ctx := context.Background()
 	ctx = signals.HandleCancellation(ctx)
 
-	err := scripts.CreateProject(ctx, name)
+	err := scripts.CreateProject(name)
 	if err != nil {
 		return fmt.Errorf("error creating project: %w", err)
 	}
