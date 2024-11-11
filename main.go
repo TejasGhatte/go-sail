@@ -16,5 +16,6 @@ var rootCmd = &cobra.Command{
 func main() {
 	initializers.LoadConfig("config.yml")
 	rootCmd.AddCommand(cmd.CreateProjectCommand)
+	rootCmd.AddCommand(cmd.SignupCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
