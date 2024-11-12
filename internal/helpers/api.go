@@ -27,14 +27,28 @@ func MakeReq(URL string, data []byte) (*http.Response, error) {
 	return response, nil
 }
 
-type Response struct {
+type DescResponse struct {
 	Status  string                 `json:"status"`
 	Message string                 `json:"message"`
-	Data    map[string]interface{} `json:"data"`
+	Descriptions []string `json:"descriptions"`
 }
 
+type AnalysisResponse struct {
+	Status  string                 `json:"status"`
+	Message string                 `json:"message"`
+	Analysis AnalyseResponse `json:"analysis"`
+}
+
+type Description struct {
+	Descriptions []string `json:"description"`
+}
+
+type AnalyseResponse struct {
+	Scores map[string]string `json:"scores"`
+	Details map[string]string `json:"details"`
+}
 // Generalized request function
-func MakeRequest(action string, extraData map[string]interface{}) (*Response, error) {
+func MakeDescriptionReq(action string, extraData map[string]interface{}) (*DescResponse, error) {
 
 	githubUrl, err := GetRepo()
 	if err != nil {
@@ -59,7 +73,48 @@ func MakeRequest(action string, extraData map[string]interface{}) (*Response, er
 	}
 	defer response.Body.Close()
 
-	var responseBody Response
+	var responseBody DescResponse
+	if response.StatusCode != http.StatusOK {
+		decoder := json.NewDecoder(response.Body)
+		if err := decoder.Decode(&responseBody); err != nil {
+			return nil, fmt.Errorf("error decoding response: %w", err)
+		}
+		return nil, fmt.Errorf("server error: %s", responseBody.Message)
+	}
+
+	if err := json.NewDecoder(response.Body).Decode(&responseBody); err != nil {
+		return nil, fmt.Errorf("error decoding response body: %w", err)
+	}
+
+	return &responseBody, nil
+}
+
+func MakeAnalysisReq(action string, extraData map[string]interface{}) (*AnalysisResponse, error) {
+
+	githubUrl, err := GetRepo()
+	if err != nil {
+		return nil, err
+	}
+	payload := map[string]interface{}{
+		"action": action,
+		"githubUrl": githubUrl,
+	}
+	for key, value := range extraData {
+		payload[key] = value
+	}
+
+	jsonData, err := json.Marshal(payload)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling payload: %w", err)
+	}
+
+	response, err := MakeReq("url", jsonData)
+	if err != nil {
+		return nil, fmt.Errorf("error making request: %w", err)
+	}
+	defer response.Body.Close()
+
+	var responseBody AnalysisResponse
 	if response.StatusCode != http.StatusOK {
 		decoder := json.NewDecoder(response.Body)
 		if err := decoder.Decode(&responseBody); err != nil {
