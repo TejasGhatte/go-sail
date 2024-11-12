@@ -39,10 +39,6 @@ type AnalysisResponse struct {
 	Analysis AnalyseResponse `json:"analysis"`
 }
 
-type Description struct {
-	Descriptions []string `json:"description"`
-}
-
 type AnalyseResponse struct {
 	Scores map[string]string `json:"scores"`
 	Details map[string]string `json:"details"`
