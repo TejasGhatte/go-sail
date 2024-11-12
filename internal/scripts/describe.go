@@ -39,6 +39,8 @@ func DescribeRepository(ctx context.Context) error {
 		return err
 	}
 
+	
+
 	fmt.Printf("File Analysis Result: %v\n", response.Descriptions)
 	return nil
 }
