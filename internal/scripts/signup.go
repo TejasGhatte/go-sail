@@ -58,7 +58,7 @@ func Signup(ctx context.Context) error {
 		} else {
 			fmt.Printf("Error decoding response: %v\n", err)
 		}
-		return fmt.Errorf("error calling mailer")
+		return fmt.Errorf("error calling server")
 	}
 	fmt.Println("Signup successful!")
 	return nil
