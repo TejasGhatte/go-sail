@@ -39,6 +39,16 @@ func Signup(ctx context.Context) error {
 	var responseBody struct {
 		Status  string `json:"status"`
 		Message string `json:"message"`
+		ApiKey  string `json:"api_key"`
+		Username string `json:"username"`
+	}
+
+	if err := helpers.StoreKey(fmt.Sprintf("sail-api-key-%s", username), responseBody.ApiKey); err != nil {
+		return err
+	}
+
+	if err := helpers.StoreKey("username", responseBody.Username); err != nil {
+		return err
 	}
 
 	if response.StatusCode != 200 {

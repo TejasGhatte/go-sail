@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"github.com/99designs/keyring"
 )
 func RemoveFolders(rootFolder string, foldersToRemove []string) {
 	for _, folder := range foldersToRemove {
@@ -42,4 +43,39 @@ func ResolveImportErr(dir string) error {
 	}
 
 	return nil
+}
+
+func StoreKey(key string, value string) error {
+    kr, err := keyring.Open(keyring.Config{
+        ServiceName: "go-sail",
+    })
+    if err != nil {
+        return err
+    }
+
+    err = kr.Set(keyring.Item{
+        Key:  key,
+        Data: []byte(value),
+    })
+    if err != nil {
+        return err
+    }
+
+    return nil
+}
+
+func GetKey(key string) (string, error) {
+    kr, err := keyring.Open(keyring.Config{
+        ServiceName: "my-cli-app",
+    })
+    if err != nil {
+        return "", err
+    }
+
+    item, err := kr.Get(key)
+    if err != nil {
+        return "", err
+    }
+
+    return string(item.Data), nil
 }
