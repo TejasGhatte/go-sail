@@ -17,5 +17,6 @@ func main() {
 	initializers.LoadConfig("config.yml")
 	rootCmd.AddCommand(cmd.CreateProjectCommand)
 	rootCmd.AddCommand(cmd.SignupCommand)
+	rootCmd.AddCommand(cmd.SetRepoCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
