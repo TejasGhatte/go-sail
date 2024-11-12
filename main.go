@@ -18,5 +18,8 @@ func main() {
 	rootCmd.AddCommand(cmd.CreateProjectCommand)
 	rootCmd.AddCommand(cmd.SignupCommand)
 	rootCmd.AddCommand(cmd.SetRepoCommand)
+	rootCmd.AddCommand(cmd.AnalyseCommand)
+	rootCmd.AddCommand(cmd.DescribeCommand)
+	rootCmd.AddCommand(cmd.SecAnalysisCommand)
 	cobra.CheckErr(rootCmd.Execute())
 }
