@@ -24,7 +24,7 @@ func SecAnalyseFolder(ctx context.Context, path string) error {
 	extraData := map[string]interface{}{
 		"path": path,
 	}
-	response, err := helpers.MakeAnalysisReq("security-analyse-file", extraData)
+	response, err := helpers.MakeAnalysisReq("security-analyse-folder", extraData)
 	if err != nil {
 		return err
 	}
@@ -34,7 +34,7 @@ func SecAnalyseFolder(ctx context.Context, path string) error {
 }
 
 func SecAnalyseRepository(ctx context.Context) error {
-	response, err := helpers.MakeAnalysisReq("security-analyse-file", nil)
+	response, err := helpers.MakeAnalysisReq("security-analyse-repository", nil)
 	if err != nil {
 		return err
 	}
