@@ -35,8 +35,14 @@ type Response struct {
 
 // Generalized request function
 func MakeRequest(action string, extraData map[string]interface{}) (*Response, error) {
+
+	githubUrl, err := GetRepo()
+	if err != nil {
+		return nil, err
+	}
 	payload := map[string]interface{}{
 		"action": action,
+		"githubUrl": githubUrl,
 	}
 	for key, value := range extraData {
 		payload[key] = value
@@ -79,4 +85,18 @@ func GetApiToken() string {
 	}
 	api_token, _ := GetKey(fmt.Sprintf("api-token-%s", username))
 	return api_token
+}
+
+func GetRepo() (string, error) {
+	cm, err := NewConfigManager()
+	if err != nil {
+		return "", fmt.Errorf("failed to initialize config manager: %v", err)
+	}
+
+	config, err := cm.LoadConfig()
+	if err != nil {
+		return "", err
+	}
+
+	return config.RepoURL, nil
 }
