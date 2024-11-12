@@ -2,10 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"context"
 	"github.com/spf13/cobra"
 	"github.com/TejasGhatte/go-sail/internal/scripts"
-	"github.com/TejasGhatte/go-sail/internal/signals"
 )
 
 var CreateProjectCommand *cobra.Command
@@ -24,9 +22,6 @@ func init() {
 }
 
 func runCreateProject(name string) error {
-	ctx := context.Background()
-	ctx = signals.HandleCancellation(ctx)
-
 	err := scripts.CreateProject(name)
 	if err != nil {
 		return fmt.Errorf("error creating project: %w", err)
